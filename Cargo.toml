@@ -1,0 +1,29 @@
+[package]
+name = "test-toolbox"
+version = "0.1.0"
+edition = "2018"
+description = "This library provides useful macros for unit testing"
+license = "MIT"
+include = ["src/**/*", "Cargo.toml", "LICENSE-MIT", "README.md"]
+homepage = "https://github.com/Nejat/test-toolbox-rs"
+repository = "https://github.com/Nejat/test-toolbox-rs"
+keywords = ["testing", "expected", "actual", "output", "capture"]
+authors = ["Nejat<nejatoz@gmail.com>"]
+categories = ["development-tools::testing"]
+
+[package.metadata.docs.rs]
+features = ["all"]
+
+[dependencies]
+cfg-if = { version = "1.0.0", optional = true }
+gag = { version = "1.0", optional = true }
+
+[dev-dependencies]
+version-sync = "0.9"
+
+[features]
+default = []
+all = ["actual", "capture", "expected"]
+actual = ["cfg-if"]
+capture = ["gag"]
+expected = ["cfg-if"]
