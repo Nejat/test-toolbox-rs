@@ -23,8 +23,8 @@
 /// # Features
 ///
 /// * lets you define both `release` and `debug` initialization values for expected variable
+/// * lets you optionally provide an explicit `type` when defining an expected variable
 ///
-/// * lets you optionally provide an explicit `type` when defining an expected variable<br><br>
 /// \* `release` _initialization value is defined first, followed by the_ `debug` _value_
 ///
 /// # Examples
@@ -34,7 +34,7 @@
 /// ```rust
 /// # use test_toolbox::expect;
 /// // 42 is the expected value for release
-/// // 0 is the expected value for debug
+/// // default is the expected value for debug
 /// expect! { expected = 42, 0 }
 /// ```
 ///

@@ -45,17 +45,12 @@
 ///
 /// # Features
 ///
-/// * lets you declare uninitialized actual variables for a specific build,<br/>_i.e._ `release` or `debug`
-///
-/// * lets you initialize other build with a value,<br/>_i.e._ _if a test targets a_ `release` _build
-/// then the value given will initialize the_ `debug` _build_
-///
-/// * lets you declare mutable actual variables with an initializer<br/><br/>\* _with mutable actual
-/// variables, the other build gets the same initializer but is not mutable_
+/// *
+/// *
 ///
 /// # Examples
 ///
-/// * debug; uninitialized actual variable<br/>
+/// * debug; uninitialized actual variable
 ///   release; actual variable initialized to default
 ///
 /// ```rust
@@ -72,7 +67,7 @@
 /// # fn sut() -> usize { 42 }
 /// ```
 ///
-/// * release; uninitialized actual variable<br/>
+/// * release; uninitialized actual variable
 ///   debug; actual variable initialized to default
 ///
 /// ```rust
@@ -89,7 +84,7 @@
 /// # fn sut() -> usize { 42 }
 /// ```
 ///
-///  * debug; uninitialized actual variable<br/>
+///  * debug; uninitialized actual variable
 ///    release; actual variable initialized to a value
 ///
 /// ```rust
@@ -106,7 +101,7 @@
 /// # fn sut() -> usize { 42 }
 /// ```
 ///
-/// * release; uninitialized actual variable<br/>
+/// * release; uninitialized actual variable
 ///   debug; actual variable initialized to a value
 ///
 /// ```rust
@@ -123,7 +118,7 @@
 /// # fn sut() -> usize { 42 }
 /// ```
 ///
-/// * debug; mutable actual variable initialized to a value<br/>
+/// * debug; mutable actual variable initialized to a value
 ///   release; immutable actual variable initialized to a value
 ///
 /// ```rust
@@ -140,7 +135,7 @@
 /// # fn sut() -> String { String::from("Forty Two") }
 /// ```
 ///
-/// * release; mutable actual variable initialized to a value<br/>
+/// * release; mutable actual variable initialized to a value
 ///   debug; immutable actual variable initialized to a value
 ///
 /// ```rust
