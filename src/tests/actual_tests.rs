@@ -1,7 +1,22 @@
 use crate::actual;
-use crate::debug;
 use crate::expect;
-use crate::release;
+
+/// testing support macro
+macro_rules! debug {
+    ($code:block) => {
+        #[cfg(debug_assertions)]
+        $code
+    }
+}
+
+/// testing support macro
+macro_rules! release {
+    ($code:block) => {
+        #[cfg(not(debug_assertions))]
+        $code
+    }
+}
+
 
 #[test]
 fn debug_actual_declaration_release_set_to_default() {
