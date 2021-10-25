@@ -13,8 +13,8 @@
 #[macro_export]
 macro_rules! capture {
     ($eval:stmt) => {{
-        let mut out = gag::BufferRedirect::stdout().expect("redirected stdout required for test");
-        let mut err = gag::BufferRedirect::stderr().expect("redirected stderr required for test");
+        let mut out = $crate::gag::BufferRedirect::stdout().expect("redirected stdout required for test");
+        let mut err = $crate::gag::BufferRedirect::stderr().expect("redirected stderr required for test");
 
         $eval
 
