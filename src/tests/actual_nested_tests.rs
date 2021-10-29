@@ -20,9 +20,9 @@ macro_rules! release {
 macro_rules! nested {
     // debug; uninitialized actual variable
     // release; actual variable initialized to default
-    (DBG $var:ident: $typ:ty) => {
+    (@dbg $var:ident: $typ:ty) => {
         expect! { expected = "", "debug" }
-        actual! { DBG $var: $typ }
+        actual! { @dbg $var: $typ }
 
         debug! {{
             $var = String::from("debug");
@@ -32,9 +32,9 @@ macro_rules! nested {
     };
     // release; uninitialized actual variable
     // debug; actual variable initialized to default
-    (RLS $var:ident: $typ:ty) => {
+    (@rls $var:ident: $typ:ty) => {
         expect! { expected = "release", "" }
-        actual! { RLS $var: $typ }
+        actual! { @rls $var: $typ }
 
         release! {{
             $var = String::from("release");
@@ -44,9 +44,9 @@ macro_rules! nested {
     };
     // debug; uninitialized actual variable
     // release; actual variable initialized to a value
-    (DBG $var:ident: $typ:ty; $val:expr) => {
+    (@dbg $var:ident: $typ:ty; $val:expr) => {
         expect! { expected = "release value", "debug" }
-        actual! { DBG $var: $typ; $val }
+        actual! { @dbg $var: $typ; $val }
 
         debug! {{
             $var = String::from("debug");
@@ -56,9 +56,9 @@ macro_rules! nested {
     };
     // release; uninitialized actual variable
     // debug; actual variable initialized to a value
-    (RLS $var:ident: $typ:ty; $val:expr) => {
+    (@rls $var:ident: $typ:ty; $val:expr) => {
         expect! { expected = "release", "debug value" }
-        actual! { RLS $var: $typ; $val }
+        actual! { @rls $var: $typ; $val }
 
         release! {{
             $var = String::from("release");
@@ -68,9 +68,9 @@ macro_rules! nested {
     };
     // debug; mutable actual variable initialized to a value
     // release; immutable actual variable initialized to a value
-    (DBG mut $var:ident: $typ:ty; $exp:expr) => {
+    (@dbg mut $var:ident: $typ:ty; $exp:expr) => {
         expect! { expected = "", "debug" }
-        actual! { DBG mut $var: $typ; $exp }
+        actual! { @dbg mut $var: $typ; $exp }
 
         debug! {{
             $var.push_str("debug");
@@ -80,9 +80,9 @@ macro_rules! nested {
     };
     // release; mutable actual variable initialized to a value
     // debug; immutable actual variable initialized to a value
-    (RLS mut $var:ident: $typ:ty; $exp:expr) => {
+    (@rls mut $var:ident: $typ:ty; $exp:expr) => {
         expect! { expected = "release", "" }
-        actual! { RLS mut $var: $typ; $exp }
+        actual! { @rls mut $var: $typ; $exp }
 
         release! {{
             $var.push_str("release");
@@ -94,30 +94,30 @@ macro_rules! nested {
 
 #[test]
 fn debug_actual_declaration_release_set_to_default() {
-    nested! { DBG actual: String }
+    nested! { @dbg actual: String }
 }
 
 #[test]
 fn debug_actual_declaration_release_set_to_value() {
-    nested! { DBG actual: String; String::from("release value") }
+    nested! { @dbg actual: String; String::from("release value") }
 }
 
 #[test]
 fn debug_actual_mutable_declaration_release_set_to_value() {
-    nested! { DBG mut actual: String; String::new() }
+    nested! { @dbg mut actual: String; String::new() }
 }
 
 #[test]
 fn release_actual_mutable_declaration_debug_set_to_value() {
-    nested! { RLS mut actual: String; String::new() }
+    nested! { @rls mut actual: String; String::new() }
 }
 
 #[test]
 fn release_actual_declaration_debug_set_to_default() {
-    nested! { RLS actual: String }
+    nested! { @rls actual: String }
 }
 
 #[test]
 fn release_actual_declaration_debug_set_to_value() {
-    nested! { RLS actual: String; String::from("debug value") }
+    nested! { @rls actual: String; String::from("debug value") }
 }
