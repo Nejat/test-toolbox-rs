@@ -21,7 +21,7 @@ macro_rules! release {
 #[test]
 fn debug_actual_declaration_release_set_to_default() {
     expect! { expected = "", "debug" }
-    actual! { DBG actual: String }
+    actual! { @dbg actual: String }
 
     debug! {{
         actual = String::from("debug");
@@ -33,7 +33,7 @@ fn debug_actual_declaration_release_set_to_default() {
 #[test]
 fn debug_actual_declaration_release_set_to_value() {
     expect! { expected = "release value", "debug" }
-    actual! { DBG actual: String; String::from("release value") }
+    actual! { @dbg actual: String; String::from("release value") }
 
     debug! {{
         actual = String::from("debug");
@@ -45,7 +45,7 @@ fn debug_actual_declaration_release_set_to_value() {
 #[test]
 fn debug_actual_mutable_declaration_release_set_to_value() {
     expect! { expected = "", "debug" }
-    actual! { DBG mut actual: String; String::new() }
+    actual! { @dbg mut actual: String; String::new() }
 
     debug! {{
         actual.push_str("debug");
@@ -57,7 +57,7 @@ fn debug_actual_mutable_declaration_release_set_to_value() {
 #[test]
 fn release_actual_mutable_declaration_debug_set_to_value() {
     expect! { expected = "release", "" }
-    actual! { RLS mut actual: String; String::new() }
+    actual! { @rls mut actual: String; String::new() }
 
     release! {{
         actual.push_str("release");
@@ -69,7 +69,7 @@ fn release_actual_mutable_declaration_debug_set_to_value() {
 #[test]
 fn release_actual_declaration_debug_set_to_default() {
     expect! { expected = "release", "" }
-    actual! { RLS actual: String }
+    actual! { @rls actual: String }
 
     release! {{
         actual = String::from("release");
@@ -81,7 +81,7 @@ fn release_actual_declaration_debug_set_to_default() {
 #[test]
 fn release_actual_declaration_debug_set_to_value() {
     expect! { expected = "release", "debug value" }
-    actual! { RLS actual: String; String::from("debug value") }
+    actual! { @rls actual: String; String::from("debug value") }
 
     release! {{
         actual = String::from("release");

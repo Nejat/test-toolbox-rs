@@ -33,7 +33,7 @@
 /// # use test_toolbox::actual;
 /// # use test_toolbox::expect;
 /// expect! { expected = Default::default(), 42 }
-/// actual! { DBG actual: usize }
+/// actual! { @dbg actual: usize }
 ///
 /// #[cfg(debug_assertions)]
 /// { actual = sut(); }
@@ -57,7 +57,7 @@
 /// # use test_toolbox::actual;
 /// # use test_toolbox::expect;
 /// expect! { expected: usize = Default::default(), 42 }
-/// actual! { DBG actual: usize }
+/// actual! { @dbg actual: usize }
 ///
 /// #[cfg(debug_assertions)]
 /// { actual = sut(); }
@@ -74,7 +74,7 @@
 /// # use test_toolbox::actual;
 /// # use test_toolbox::expect;
 /// expect! { expected: usize = 42, Default::default() }
-/// actual! { RLS actual: usize }
+/// actual! { @rls actual: usize }
 ///
 /// #[cfg(not(debug_assertions))]
 /// { actual = sut(); }
@@ -91,7 +91,7 @@
 /// # use test_toolbox::actual;
 /// # use test_toolbox::expect;
 /// expect! { expected: usize = 2, 42 }
-/// actual! { DBG actual: usize; 2 }
+/// actual! { @dbg actual: usize; 2 }
 ///
 /// #[cfg(debug_assertions)]
 /// { actual = sut(); }
@@ -108,7 +108,7 @@
 /// # use test_toolbox::actual;
 /// # use test_toolbox::expect;
 /// expect! { expected: usize = 42, 2 }
-/// actual! { RLS actual: usize; 2 }
+/// actual! { @rls actual: usize; 2 }
 ///
 /// #[cfg(not(debug_assertions))]
 /// { actual = sut(); }
@@ -125,7 +125,7 @@
 /// # use test_toolbox::actual;
 /// # use test_toolbox::expect;
 /// expect! { expected = "", "Forty Two" }
-/// actual! { DBG mut actual: String; String::new() }
+/// actual! { @dbg mut actual: String; String::new() }
 ///
 /// #[cfg(debug_assertions)]
 /// { actual.push_str(&sut()); }
@@ -142,7 +142,7 @@
 /// # use test_toolbox::actual;
 /// # use test_toolbox::expect;
 /// expect! { expected = "Forty Two", "" }
-/// actual! { RLS mut actual: String; String::new() }
+/// actual! { @rls mut actual: String; String::new() }
 ///
 /// #[cfg(not(debug_assertions))]
 /// { actual.push_str(&sut()); }
@@ -155,7 +155,7 @@
 macro_rules! actual {
     // debug; uninitialized actual variable
     // release; actual variable initialized to default
-    (DBG $var:ident: $typ:ty) => {
+    (@dbg $var:ident: $typ:ty) => {
         cfg_if::cfg_if! {
             if #[cfg(not(debug_assertions))] {
                 let $var: $typ = Default::default();
@@ -166,7 +166,7 @@ macro_rules! actual {
     };
     // release; uninitialized actual variable
     // debug; actual variable initialized to default
-    (RLS $var:ident: $typ:ty) => {
+    (@rls $var:ident: $typ:ty) => {
         cfg_if::cfg_if! {
             if #[cfg(not(debug_assertions))] {
                 let $var: $typ;
@@ -177,7 +177,7 @@ macro_rules! actual {
     };
     // debug; uninitialized actual variable
     // release; actual variable initialized to a value
-    (DBG $var:ident: $typ:ty; $val:expr) => {
+    (@dbg $var:ident: $typ:ty; $val:expr) => {
         cfg_if::cfg_if! {
             if #[cfg(not(debug_assertions))] {
                 let $var: $typ = $val;
@@ -188,7 +188,7 @@ macro_rules! actual {
     };
     // release; uninitialized actual variable
     // debug; actual variable initialized to a value
-    (RLS $var:ident: $typ:ty; $val:expr) => {
+    (@rls $var:ident: $typ:ty; $val:expr) => {
         cfg_if::cfg_if! {
             if #[cfg(not(debug_assertions))] {
                 let $var: $typ;
@@ -199,7 +199,7 @@ macro_rules! actual {
     };
     // debug; mutable actual variable initialized to a value
     // release; immutable actual variable initialized to a value
-    (DBG mut $var:ident: $typ:ty; $exp:expr) => {
+    (@dbg mut $var:ident: $typ:ty; $exp:expr) => {
         cfg_if::cfg_if! {
             if #[cfg(not(debug_assertions))] {
                 let $var = $exp;
@@ -210,7 +210,7 @@ macro_rules! actual {
     };
     // release; mutable actual variable initialized to a value
     // debug; immutable actual variable initialized to a value
-    (RLS mut $var:ident: $typ:ty; $exp:expr) => {
+    (@rls mut $var:ident: $typ:ty; $exp:expr) => {
         cfg_if::cfg_if! {
             if #[cfg(not(debug_assertions))] {
                 let mut $var = $exp;
