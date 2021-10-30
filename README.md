@@ -8,7 +8,7 @@ Utility library of helper macros for working with unit tests.
 * `capture!` - captures `stdout` and `stderr` for testing output
 
 ## Resources
-* [Docs](https://docs.rs/test-toolbox/0.3.0/test_toolbox/) for more detailed information
+* [Docs](https://docs.rs/test-toolbox/0.4.0/test_toolbox/) for more detailed information
 
 ## Usage
 
@@ -20,21 +20,21 @@ No feature is mutually exclusive and can be combined as needed.
 ```toml
 [dependencies]
 
-test-toolbox = { version = "0.3", features = ["actual"] }
+test-toolbox = { version = "0.4", features = ["actual"] }
 ```
 
 * `capture!` macro
 ```toml
 [dependencies]
 
-test-toolbox = { version = "0.3", features = ["capture"] }
+test-toolbox = { version = "0.4", features = ["capture"] }
 ```
 
 * `expect!` macro
 ```toml
 [dependencies]
 
-test-toolbox = { version = "0.3", features = ["expect"] }
+test-toolbox = { version = "0.4", features = ["expect"] }
 ```
 
 ## Implemented
