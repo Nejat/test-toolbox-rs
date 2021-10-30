@@ -16,9 +16,25 @@ Each macro is gated by a feature.
 
 No feature is mutually exclusive and can be combined as needed.
 
+* `actual!` macro
 ```toml
 [dependencies]
-test-toolbox = { version = "0.3", features = ["actual", "capture", "expect"] }
+
+test-toolbox = { version = "0.3", features = ["actual"] }
+```
+
+* `capture!` macro
+```toml
+[dependencies]
+
+test-toolbox = { version = "0.3", features = ["capture"] }
+```
+
+* `expect!` macro
+```toml
+[dependencies]
+
+test-toolbox = { version = "0.3", features = ["expect"] }
 ```
 
 ## Implemented
