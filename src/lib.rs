@@ -7,7 +7,7 @@
 #![allow(clippy::module_name_repetitions)]
 #![allow(clippy::items_after_statements)]
 // ==============================================================
-#![doc(html_root_url = "https://docs.rs/test-toolbox/0.3.0")]
+#![doc(html_root_url = "https://docs.rs/test-toolbox/0.4.0")]
 
 //! Utility library of helper macros for working with unit tests.
 //!
