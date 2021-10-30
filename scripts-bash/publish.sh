@@ -47,23 +47,45 @@ then
     confirm-success "clean"
 fi
 
-cargo clippy --all-features
-confirm-success "clippy"
+echo -e "${YELLOW}running clippy actual unoptimized"
+cargo clippy --features="actual"
+confirm-success "clippy actual unoptimized"
 
-cargo clippy --release --all-features
-confirm-success "clippy release"
+echo -e "${YELLOW}running clippy actual optimized"
+cargo clippy --release --features="actual"
+confirm-success "clippy actual optimized"
 
-cargo test --all-features -- --nocapture --test-threads=1
-confirm-success "test"
+echo -e "${YELLOW}running clippy capture unoptimized"
+cargo clippy --features="capture"
+confirm-success "clippy capture unoptimized"
 
-cargo test --all-features --release -- --nocapture --test-threads=1
-confirm-success "test release"
+echo -e "${YELLOW}running clippy capture optimized"
+cargo clippy --release --features="capture"
+confirm-success "clippy capture optimized"
 
-cargo publish --locked --all-features --dry-run
-confirm-success "publish dry run"
+echo -e "${YELLOW}running clippy expected unoptimized"
+cargo clippy --features="expected"
+confirm-success "clippy expected unoptimized"
+
+echo -e "${YELLOW}running clippy expected optimized"
+cargo clippy --release --features="expected"
+confirm-success "clippy expected optimized"
+
+echo -e "${YELLOW}running test all features unoptimized"
+cargo test --features="all" -- --nocapture --test-threads=1
+confirm-success "test all features unoptimized"
+
+echo -e "${YELLOW}running test all features optimized"
+cargo test --features="all" --release -- --nocapture --test-threads=1
+confirm-success "test all features optimized"
 
 if [[ "${for_reals}" == "true" ]]
 then
-  cargo publish --locked --all-features
+  echo -e "${YELLOW}publish"
+  cargo publish --locked --features="all"
   confirm-success "publish"
+else
+  echo -e "${YELLOW}publish dry run"
+  cargo publish --locked --features="all" --dry-run
+  confirm-success "publish dry run"
 fi

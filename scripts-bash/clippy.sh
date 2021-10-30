@@ -22,8 +22,26 @@ function confirm-success() {
 }
 
 clear
-cargo clippy --all-features
-confirm-success "clippy"
+echo -e "${YELLOW}running clippy actual unoptimized"
+cargo clippy --features="actual"
+confirm-success "clippy actual unoptimized"
 
-cargo clippy --release --all-features
-confirm-success "clippy release"
+echo -e "${YELLOW}running clippy actual optimized"
+cargo clippy --release --features="actual"
+confirm-success "clippy actual optimized"
+
+echo -e "${YELLOW}running clippy capture unoptimized"
+cargo clippy --features="capture"
+confirm-success "clippy capture unoptimized"
+
+echo -e "${YELLOW}running clippy capture optimized"
+cargo clippy --release --features="capture"
+confirm-success "clippy capture optimized"
+
+echo -e "${YELLOW}running clippy expected unoptimized"
+cargo clippy --features="expected"
+confirm-success "clippy expected unoptimized"
+
+echo -e "${YELLOW}running clippy expected optimized"
+cargo clippy --release --features="expected"
+confirm-success "clippy expected optimized"

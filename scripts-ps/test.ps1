@@ -20,8 +20,10 @@ if (Test-Path -Path $script -PathType Leaf) {
 }
 
 clear
-cargo test --all-features -- --nocapture --test-threads=1
-Confirm-Success "test"
+Write-Host "running test all features unoptimized" -ForegroundColor Yellow
+cargo test --features="all" -- --nocapture --test-threads=1
+Confirm-Success "test all features unoptimized"
 
-cargo test --all-features --release -- --nocapture --test-threads=1
-Confirm-Success "test release"
+Write-Host "running test all features optimized" -ForegroundColor Yellow
+cargo test --release --features="all" -- --nocapture --test-threads=1
+Confirm-Success "test all features optimized"
