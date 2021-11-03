@@ -156,7 +156,7 @@ macro_rules! actual {
     // debug; uninitialized actual variable
     // release; actual variable initialized to default
     (@dbg $var:ident: $typ:ty) => {
-        cfg_if::cfg_if! {
+        $crate::cfg_if::cfg_if! {
             if #[cfg(not(debug_assertions))] {
                 let $var: $typ = Default::default();
             } else {
@@ -167,7 +167,7 @@ macro_rules! actual {
     // release; uninitialized actual variable
     // debug; actual variable initialized to default
     (@rls $var:ident: $typ:ty) => {
-        cfg_if::cfg_if! {
+        $crate::cfg_if::cfg_if! {
             if #[cfg(not(debug_assertions))] {
                 let $var: $typ;
             } else {
@@ -178,7 +178,7 @@ macro_rules! actual {
     // debug; uninitialized actual variable
     // release; actual variable initialized to a value
     (@dbg $var:ident: $typ:ty; $val:expr) => {
-        cfg_if::cfg_if! {
+        $crate::cfg_if::cfg_if! {
             if #[cfg(not(debug_assertions))] {
                 let $var: $typ = $val;
             } else {
@@ -189,7 +189,7 @@ macro_rules! actual {
     // release; uninitialized actual variable
     // debug; actual variable initialized to a value
     (@rls $var:ident: $typ:ty; $val:expr) => {
-        cfg_if::cfg_if! {
+        $crate::cfg_if::cfg_if! {
             if #[cfg(not(debug_assertions))] {
                 let $var: $typ;
             } else {
@@ -200,7 +200,7 @@ macro_rules! actual {
     // debug; mutable actual variable initialized to a value
     // release; immutable actual variable initialized to a value
     (@dbg mut $var:ident: $typ:ty; $exp:expr) => {
-        cfg_if::cfg_if! {
+        $crate::cfg_if::cfg_if! {
             if #[cfg(not(debug_assertions))] {
                 let $var = $exp;
             } else {
@@ -211,7 +211,7 @@ macro_rules! actual {
     // release; mutable actual variable initialized to a value
     // debug; immutable actual variable initialized to a value
     (@rls mut $var:ident: $typ:ty; $exp:expr) => {
-        cfg_if::cfg_if! {
+        $crate::cfg_if::cfg_if! {
             if #[cfg(not(debug_assertions))] {
                 let mut $var = $exp;
             } else {

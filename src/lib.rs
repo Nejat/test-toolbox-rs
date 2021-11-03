@@ -7,7 +7,7 @@
 #![allow(clippy::module_name_repetitions)]
 #![allow(clippy::items_after_statements)]
 // ==============================================================
-#![doc(html_root_url = "https://docs.rs/test-toolbox/0.4.0")]
+#![doc(html_root_url = "https://docs.rs/test-toolbox/0.5.0")]
 
 //! Utility library of helper macros for working with unit tests.
 //!
@@ -27,6 +27,10 @@ mod expect;
 #[cfg(feature = "capture")]
 #[doc(hidden)]
 pub use gag;
+
+#[cfg(any(feature = "actual", feature = "expected"))]
+#[doc(hidden)]
+pub use cfg_if;
 
 #[cfg(test)]
 mod tests;

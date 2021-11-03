@@ -50,7 +50,7 @@
 macro_rules! expect {
     // declare expected variable implicitly typed
     ($var:ident = $rls:expr, $dgb:expr) => {
-        cfg_if::cfg_if! {
+        $crate::cfg_if::cfg_if! {
             if #[cfg(not(debug_assertions))] {
                 let $var = $rls;
             } else {
@@ -60,7 +60,7 @@ macro_rules! expect {
     };
     // declare expected variable explicitly typed
     ($var:ident: $typ:ty = $rls:expr, $dgb:expr) => {
-        cfg_if::cfg_if! {
+        $crate::cfg_if::cfg_if! {
             if #[cfg(not(debug_assertions))] {
                 let $var: $typ = $rls;
             } else {
