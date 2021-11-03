@@ -28,5 +28,9 @@ mod expect;
 #[doc(hidden)]
 pub use gag;
 
+#[cfg(any(feature = "actual", feature = "expected"))]
+#[doc(hidden)]
+pub use cfg_if;
+
 #[cfg(test)]
 mod tests;
